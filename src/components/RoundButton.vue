@@ -31,8 +31,6 @@ export default {
     background: #000000;
     border-radius: 100px;
     color: #FFFFFF;
-    font-family: 'Abel';
-    font-style: normal;
     font-weight: 400;
     font-size: 15px;
     line-height: 22px;

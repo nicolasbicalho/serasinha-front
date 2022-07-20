@@ -39,7 +39,6 @@ const router = VueRouter.createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    console.log('ENTROU')
 	const token = auth.getToken();
     console.log('token', token);
 	if (!['/login', '/register'].includes(to.path) && !token) {

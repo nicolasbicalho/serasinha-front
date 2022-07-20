@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-between p-2 border bg-light">
+  <div class="main-navbar d-flex justify-content-between p-2 border bg-light">
     <div class="title">
       Serasinha
     </div>
@@ -18,8 +18,7 @@ export default {
 
 <style scoped>
   .main-navbar {
-    border: 5px;
-    border-color: #E0E0E0;
+    margin-top: 20px;
   }
   .navbar-images {
     display: flex;
