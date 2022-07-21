@@ -59,7 +59,7 @@ export default {
 
 .login {
 	margin: auto;
-	top: 30%;
+	margin-top: 60px;
 	text-align: center;
 }
 
