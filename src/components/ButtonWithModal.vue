@@ -1,21 +1,18 @@
 <template>
 	<div>
-		<b-button :disabled="disabled" :class="buttonCss || {}" v-b-modal="'bv-modal'">
+		<b-button v-b-modal="'bv-modal'">
 			{{buttonText}}
 		</b-button>
 		<b-modal
             id="bv-modal"
+            class="b-modal"
+            ref="modal"
 			hide-footer
 			size="sm"
             :title="modalTitle"
 			centered>
-			<!-- <b-table v-if="modalTable && modalTableFields"
-				:items="modalTable"
-				:fixed="true"
-				:fields="modalTableFields"
-				responsive="sm"/> -->
 			<slot />
-			<b-button :class="confirmCSS" @click="confirmButton">
+			<b-button class="confirm-button" @click="confirmButton">
 				{{confirmText}}
 			</b-button>
 		</b-modal>
@@ -28,26 +25,21 @@ export default {
 	props: {
 		buttonText: String,
 		confirmText: String,
-		buttonCss: Object,
-		confirmCSS: Object,
 		modalTitle: String,
 		confirmCallback: Function,
-		modalTable: Array,
-		modalTableFields: Array,
-		disabled: {
-			type: Boolean,
-			default: false
-		}
 	},
 	methods: {
 		confirmButton () {
-			this.$refs.modal.hide()
+            document.querySelector('#bv-modal').classList.remove('show');
+            document.querySelectorAll('.modal-backdrop').forEach(el => el.classList.remove('show'));
 			this.confirmCallback()
 		}
 	},
 }
 </script>
 
-<style>
-
+<style scoped>
+.confirm-button {
+    width: 100%;
+}
 </style>

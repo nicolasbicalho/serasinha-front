@@ -5,14 +5,24 @@
     </div>
     <div class="navbar-images">
       <img style="margin-right: 20px" src="../assets/envelope.svg" alt="">
-      <img src="../assets/user.svg" alt="">
+      <img style="margin-right: 20px" src="../assets/user.svg" alt="">
+      <button @click="logout" type="button" class="btn btn-secondary">
+        Logout
+      </button>
     </div>
   </div>
 </template>
 
 <script>
+import { SerasinhaService } from '../SerasinhaService';
+
 export default {
   name: 'MainNavbar',
+  methods: {
+    logout() {
+      return SerasinhaService.logout();
+    }
+  }
 }
 </script>
 

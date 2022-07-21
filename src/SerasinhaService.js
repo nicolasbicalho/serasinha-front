@@ -24,6 +24,10 @@ function login({ email, password }) {
     //     })
 }
 
+function logout() {
+    return auth.unsetAuth();
+}
+
 function register({ email, password }) {
     const token = '123456';
 
@@ -82,9 +86,29 @@ function getMainMenuData() {
     //     })
 }
 
+function transferValue({ emailToSend, transferValue }) {
+    console.log('emailToSend', emailToSend);
+    console.log('transferValue', transferValue);
+
+    return 'ok';
+
+	// return SerasinhaApi
+	// 	.post('transfer-value', { email, password })
+	// 	.then((res) => {
+    //         if (res.status !== 200) {
+    //             return Promise.reject(new Error('login failed'))
+    //         }
+    //         const token = res.text().then(JSON.parse);
+    //         auth.setAuth(token, email);
+    //         return router.push('/');
+    //     })
+}
+
 
 export const SerasinhaService = {
 	login,
     register,
     getMainMenuData,
+    transferValue,
+    logout,
 }

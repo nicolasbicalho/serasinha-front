@@ -7,8 +7,9 @@
 			<div style="margin-top: 8px" class="login-big">Cadastro</div>
 		</div>
 		<div>
-			<InputWithLabel @input="setEmailValue" style="margin-bottom: 24px" label="E-mail" />
-			<InputWithLabel @input="setPasswordValue" label="Escolha uma senha" />
+			<InputWithLabel @input="setEmailValue" style="margin-bottom: 24px" label="Escreva seu e-mail" />
+			<InputWithLabel class="mb-2" @input="setPasswordValue" label="Escolha uma senha" />
+			<a class="login-button" @click="goToLogin">fazer login</a>
 		</div>
 		<div style="margin-top: 32px">
 			<RoundButton @click="register" buttonText="CADASTRAR" :backgroundColor="buttonBackgroundColor" />
@@ -44,6 +45,9 @@ export default {
 			console.log('email', this.email);
 			console.log('password', this.password);
 			return SerasinhaService.register({ email: this.email, password: this.password });
+		},
+		goToLogin() {
+			this.$router.push({ path: '/login' });
 		}
 	}
 
@@ -94,5 +98,21 @@ export default {
 	border-radius: 20px;
 	height: 98px;
 	width: 104px;
+}
+
+.login-button {
+	letter-spacing: 0.374px;
+	font-family: 'Abel';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 20px;
+	/* text-align: center; */
+
+	color: #4C6EB0;
+	text-decoration: none;
+}
+
+.login-button:hover {
+	cursor: pointer;
 }
 </style>

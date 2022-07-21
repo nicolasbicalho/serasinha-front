@@ -24,9 +24,15 @@
           <b-table class="m-0" striped hover :items="transactions"></b-table>
         </div>
       </div>
-      <div>
-        <ButtonWithModal modalTitle="Nova Transferência" :buttonText="'Criar Nova Transferência'">
-          <p>AAAAAAAAAAAAAAAAA</p>
+      <div class="button-modal">
+        <ButtonWithModal
+          confirmText="Transferir"
+          modalTitle="Nova Transferência"
+          buttonText="Criar Nova Transferência"
+          :confirmCallback="generateNewTransfer"
+        >
+          <InputWithLabel placeholder="E-mail" inputPadding="10px 12px" @input="setEmailToSend" label="Para qual usuário deseja transferir?" />
+          <InputWithLabel style="margin-top: 20px; margin-bottom: 20px;" placeholder="R$" inputPadding="10px 12px" @input="setTransferValue" label="Qual valor deseja transferir? (Em reais)" />
         </ButtonWithModal>
       </div>
     </div>
@@ -37,6 +43,7 @@
 import MainNavbar from '../components/MainNavbar.vue';
 import ScoreCard from '../components/ScoreCard.vue';
 import ButtonWithModal from '../components/ButtonWithModal.vue';
+import InputWithLabel from '../components/InputWithLabel.vue';
 import { SerasinhaService } from '../SerasinhaService';
 export default {
     name: 'MainMenu',
@@ -44,13 +51,34 @@ export default {
       MainNavbar,
       ScoreCard,
       ButtonWithModal,
+      InputWithLabel,
     },
     data: () => ({
       sanitizedName: '',
       walletValue: 0,
       score: 0,
+      emailToSend: '',
+      transferValue: 0,
       transactions: [],
     }),
+    methods: {
+      setEmailToSend(value) {
+			this.emailToSend = value;
+		},
+		setTransferValue(value) {
+			this.transferValue = value;
+		},
+      async generateNewTransfer() {
+        if (!this.emailToSend || !this.transferValue) return null;
+        await SerasinhaService.transferValue({
+          emailToSend: this.emailToSend,
+          transferValue: this.transferValue,
+        });
+        
+        this.transferValue = 0;
+        this.emailToSend = '';
+      }
+    },
     async mounted () {
       this.sanitizedName = localStorage.getItem('email') ? localStorage.getItem('email').split('@')[0] : 'humano';
       const { walletValue, score, transactions } = await SerasinhaService.getMainMenuData();
@@ -71,10 +99,7 @@ export default {
     font-weight: 400;
     font-size: 34px;
     line-height: 41px;
-    /* identical to box height, or 121% */
-
     letter-spacing: 0.374px;
-
     color: #818181;
   }
 
@@ -84,7 +109,6 @@ export default {
     border-radius: 100px;
     padding: 10px;
     margin-bottom: 12px;
-
   }
 
   .wallet-text {
@@ -101,19 +125,18 @@ export default {
     font-weight: 400;
     font-size: 36px;
     line-height: 16px;
-
     display: flex;
     align-items: center;
     margin-right: 12px;
-
     color: #000000;
   }
 
   .transaction-history {
-    margin-top: 60px;
+    margin-top: 50px;
     display: flex;
     justify-content: center;
   }
+
   .transaction-label {
     margin-top: 16px;
     margin-bottom: 24px;
@@ -124,7 +147,12 @@ export default {
     line-height: 22px;
     align-self: center;
     letter-spacing: -0.408px;
-
     color: #000000;
+  }
+
+  .button-modal {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
   }
 </style>
