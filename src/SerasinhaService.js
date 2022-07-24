@@ -93,7 +93,7 @@ function transferValue({ emailToSend, transferValue }) {
     return 'ok';
 
 	// return SerasinhaApi
-	// 	.post('transfer-value', { email, password })
+	// 	.get('transfer-value', { email, password })
 	// 	.then((res) => {
     //         if (res.status !== 200) {
     //             return Promise.reject(new Error('login failed'))

@@ -8,7 +8,7 @@
 		</div>
 		<div>
 			<InputWithLabel @input="setEmailValue" style="margin-bottom: 24px" label="Escreva seu e-mail" />
-			<InputWithLabel class="mb-2" @input="setPasswordValue" label="Escolha uma senha" />
+			<InputWithLabel type="password" class="mb-2" @input="setPasswordValue" label="Escolha uma senha" />
 			<a class="login-button" @click="goToLogin">fazer login</a>
 		</div>
 		<div style="margin-top: 32px">

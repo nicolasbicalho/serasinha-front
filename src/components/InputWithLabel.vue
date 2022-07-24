@@ -1,8 +1,12 @@
 <template>
   <div>
       <div class="label"> {{ label }} </div>
-      <input :placeholder="placeholder" :style="`padding: ${inputPadding}`" class="input" type="text" v-model="value" @change="onInput">
-
+      <input
+        :placeholder="placeholder"
+        :style="`padding: ${inputPadding}`"
+        class="input"
+        :type="type || 'text'"
+        v-model="value" @change="onInput">
   </div>
 </template>
 
@@ -16,6 +20,7 @@ export default {
         label: String,
         inputPadding: String,
         placeholder: String,
+        type: String,
     },
     methods: {
         onInput() {

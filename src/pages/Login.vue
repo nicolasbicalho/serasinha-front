@@ -8,7 +8,7 @@
 		</div>
 		<div>
 			<InputWithLabel @input="setEmailValue" style="margin-bottom: 24px" label="e-mail" />
-			<InputWithLabel class="mb-2" @input="setPasswordValue" label="senha" />
+			<InputWithLabel type="password" class="mb-2" @input="setPasswordValue" label="senha" />
 			<a class="register" @click="goToRegister">cadastre-se</a>
 		</div>
 		<RoundButton @click="login" buttonText="ENTRAR" :backgroundColor="buttonBackgroundColor" />
