@@ -18,6 +18,9 @@ function login({ email, password }) {
                 return Promise.reject(new Error('login failed'))
             }
             const { data } = res;
+            if (!data.userId) {
+                return alert('Login inválido!');
+            }
             auth.setAuth(data);
             return router.push('/');
         }).catch(err => {
