@@ -1,27 +1,29 @@
 /* eslint-disable no-unused-vars */
+import querystring from 'querystring';
 import axios from 'axios';
 import auth from './auth';
 import router from './router';
 import util from './util';
 
 
-const SerasinhaApi = axios.create({ timeout: 3600000, baseURL: 'https://serasinha.herokuapp.com' });
+const SerasinhaApi = axios.create({ timeout: 3600000, baseURL: 'https://app-serasinhadb.herokuapp.com' });
 
 function login({ email, password }) {
-    const token = '123456';
+    // const token = '123456';
 
-    auth.setAuth(token, email);
-    router.push('/')
-	// return SerasinhaApi
-	// 	.post('login', { email, password })
-	// 	.then((res) => {
-    //         if (res.status !== 200) {
-    //             return Promise.reject(new Error('login failed'))
-    //         }
-    //         const token = res.text().then(JSON.parse);
-    //         auth.setAuth(token, email);
-    //         return router.push('/');
-    //     })
+    // auth.setAuth(token, email);
+    // router.push('/')
+	return SerasinhaApi
+		.post('login', { email, password })
+		.then((res) => {
+            console.log('res', res)
+            // if (res.status !== 200) {
+            //     return Promise.reject(new Error('login failed'))
+            // }
+            // const token = res.text().then(JSON.parse);
+            // auth.setAuth(token, email);
+            // return router.push('/');
+        })
 }
 
 function logout() {
@@ -90,18 +92,18 @@ function transferValue({ emailToSend, transferValue }) {
     console.log('emailToSend', emailToSend);
     console.log('transferValue', transferValue);
 
-    return 'ok';
+    // return 'ok';
 
-	// return SerasinhaApi
-	// 	.get('transfer-value', { email, password })
-	// 	.then((res) => {
-    //         if (res.status !== 200) {
-    //             return Promise.reject(new Error('login failed'))
-    //         }
-    //         const token = res.text().then(JSON.parse);
-    //         auth.setAuth(token, email);
-    //         return router.push('/');
-    //     })
+	return SerasinhaApi
+		.get(`transfer-value?${querystring.stringify({ emailToSend, transferValue })}`)
+		.then((res) => {
+            if (res.status !== 200) {
+                return Promise.reject(new Error('transfer error'))
+            }
+            return {
+                // emailToSend
+            };
+        })
 }
 
 

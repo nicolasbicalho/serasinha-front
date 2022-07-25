@@ -65,11 +65,12 @@ export default {
       setEmailToSend(value) {
 			this.emailToSend = value;
 		},
-		setTransferValue(value) {
-			this.transferValue = value;
-		},
+      setTransferValue(value) {
+        this.transferValue = value;
+      },
       async generateNewTransfer() {
         if (!this.emailToSend || !this.transferValue) return null;
+        if (this.transferValue > this.walletValue) return alert('Você não pode transferir essa quantidade!')
         await SerasinhaService.transferValue({
           emailToSend: this.emailToSend,
           transferValue: this.transferValue,
