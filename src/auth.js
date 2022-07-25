@@ -1,8 +1,11 @@
 import router from './router'
 
-function setAuth (token, email) {
-	localStorage.setItem('token', token)
-	localStorage.setItem('email', email)
+function setAuth (data) {
+	localStorage.setItem('userId', data.id);
+	localStorage.setItem('accountId', data.accountId);
+	localStorage.setItem('name', data.name);
+	localStorage.setItem('email', data.email);
+	localStorage.setItem('phone', data.phone);
 }
 
 function unsetAuth () {
@@ -10,21 +13,12 @@ function unsetAuth () {
 	router.push('/login')
 }
 
-function getAuthHeader () {
-	const token = localStorage.getItem('token')
-	if (!token) return {}
-	return {
-		'Authorization': 'Bearer ' + token
-	}
-}
-
 function getToken () {
-	return localStorage.getItem('token')
+	return localStorage.getItem('userId')
 }
 
 export default {
 	setAuth,
 	unsetAuth,
-	getAuthHeader,
 	getToken
 }

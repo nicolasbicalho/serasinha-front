@@ -1,14 +1,37 @@
 <template>
   <div class="login">
-		<div style="margin-bottom: 100px">
+		<div style="margin-bottom: 20px">
 			<div class="justify-center">
 				<div class="pink-box"></div>
 			</div>
 			<div style="margin-top: 8px" class="login-big">Cadastro</div>
 		</div>
 		<div>
-			<InputWithLabel @input="setEmailValue" style="margin-bottom: 24px" label="Escreva seu e-mail" />
-			<InputWithLabel type="password" class="mb-2" @input="setPasswordValue" label="Escolha uma senha" />
+			<InputWithLabel
+				placeholder="Nome"
+				inputPadding="8px 10px"
+				@input="setNameValue"
+				style="margin-bottom: 12px"
+				label="Nome"/>
+			<InputWithLabel
+				placeholder="Telefone"
+				inputPadding="8px 10px"
+				@input="setPhoneValue"
+				style="margin-bottom: 12px"
+				label="Telefone"/>
+			<InputWithLabel
+				placeholder="E-mail"
+				inputPadding="8px 10px"
+				@input="setEmailValue"
+				style="margin-bottom: 12px"
+				label="E-mail"/>
+			<InputWithLabel
+				placeholder="Senha"
+				inputPadding="8px 10px"
+				type="password"
+				class="mb-2"
+				@input="setPasswordValue"
+				label="Escolha uma senha"/>
 			<a class="login-button" @click="goToLogin">fazer login</a>
 		</div>
 		<div style="margin-top: 32px">
@@ -28,6 +51,8 @@ export default {
 	data: () => ({
 		email: '',
 		password: '',
+		name: '',
+		phone: '',
 		buttonBackgroundColor: "#000000",
 	}),
 	components: {
@@ -41,10 +66,23 @@ export default {
 		setPasswordValue(value) {
 			this.password = value;
 		},
+		setNameValue(value) {
+			this.name = value;
+		},
+		setPhoneValue(value) {
+			this.phone = value;
+		},
 		register () {
 			console.log('email', this.email);
 			console.log('password', this.password);
-			return SerasinhaService.register({ email: this.email, password: this.password });
+			console.log('name', this.name);
+			console.log('phone', this.phone);
+			return SerasinhaService.register({
+				email: this.email,
+				password: this.password,
+				name: this.name,
+				phone: this.phone,
+				});
 		},
 		goToLogin() {
 			this.$router.push({ path: '/login' });
@@ -59,7 +97,7 @@ export default {
 
 .login {
 	margin: auto;
-	margin-top: 60px;
+	margin-top: 30px;
 	text-align: center;
 }
 

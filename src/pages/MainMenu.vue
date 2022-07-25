@@ -74,15 +74,16 @@ export default {
         await SerasinhaService.transferValue({
           emailToSend: this.emailToSend,
           transferValue: this.transferValue,
+          accountId: localStorage.getItem('accountId')
         });
-        
-        this.transferValue = 0;
-        this.emailToSend = '';
+        document.location.reload(true);
       }
     },
     async mounted () {
-      this.sanitizedName = localStorage.getItem('email') ? localStorage.getItem('email').split('@')[0] : 'humano';
-      const { walletValue, score, transactions } = await SerasinhaService.getMainMenuData();
+      this.sanitizedName = localStorage.getItem('name') || 'humano';
+      const { walletValue, score, transactions } = await SerasinhaService.getMainMenuData({
+        userId: localStorage.getItem('userId'),
+        });
 
       this.walletValue = walletValue;
       this.score = score;
